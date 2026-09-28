@@ -1,1 +1,14 @@
-
+{
+  "plugin_key": "spoolman_importer",
+  "name": "SpoolMan Importer",
+  "version": "0.1.0",
+  "description": "Imports filament inventory from a SpoolMan server into OrcaSlicer filament presets.",
+  "author": "Your Name",
+  "capabilities": [
+    {
+      "type": "pages",
+      "name": "SpoolMan",
+      "entry": "spoolman_plugin:SpoolManPage"
+    }
+  ]
+}
