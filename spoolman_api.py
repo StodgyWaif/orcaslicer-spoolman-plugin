@@ -1,3 +1,13 @@
+# /// script
+# requires-python = ">=3.9"
+# dependencies = [
+#     "requests>=2.28.0",
+# ]
+# [project]
+# name = "spoolman-api"
+# version = "0.1.0"
+# /// 
+
 import json
 import requests
 
@@ -114,7 +124,6 @@ class SpoolManClient:
                 "raw": item
             }
 
-            # keep original raw values as well if needed for later
             record["raw"] = item
             normalized.append(record)
         return normalized
