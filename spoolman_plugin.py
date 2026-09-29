@@ -1,14 +1,10 @@
 # /// script
-# requires-python = ">=3.9"
-# dependencies = [
-#     "requests>=2.28.0",
-# ]
-# [project]
 # name = "spoolman-importer"
 # version = "0.1.0"
 # description = "Imports filament inventory from a SpoolMan server into OrcaSlicer filament presets."
-# authors = [{name = "Your Name"}]
-# /// 
+# requires-python = ">=3.9"
+# dependencies = ["requests>=2.28.0"]
+# ///
 
 """
 SpoolMan Importer Plugin for OrcaSlicer
@@ -174,7 +170,6 @@ class SpoolManPage:
             }
 
 
-# Plugin entry point
 def get_plugin_page():
     """Factory function to create the plugin page"""
     return SpoolManPage()
