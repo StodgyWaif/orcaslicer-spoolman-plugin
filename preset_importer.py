@@ -1,3 +1,11 @@
+# /// script
+# requires-python = ">=3.9"
+# dependencies = []
+# [project]
+# name = "spoolman-preset-importer"
+# version = "0.1.0"
+# /// 
+
 import os
 import re
 from pathlib import Path
@@ -28,7 +36,6 @@ class PresetImportBuilder:
         except Exception:
             rendered = f"{variables.get('brand', 'Unknown')} {variables.get('type', 'Unknown')} {variables.get('spool_id', 'Unknown')}"
 
-        # sanitize for files
         sanitized = re.sub(r"[^A-Za-z0-9 _\\-().]", "_", rendered)
         sanitized = sanitized.strip()
         return sanitized or "Imported_Filament"
