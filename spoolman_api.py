@@ -1,10 +1,3 @@
-# /// script
-# name = "spoolman-api"
-# version = "0.1.0"
-# requires-python = ">=3.9"
-# dependencies = ["requests>=2.28.0"]
-# ///
-
 import json
 import requests
 
