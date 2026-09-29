@@ -1,134 +1,180 @@
-import os
+# /// script
+# requires-python = ">=3.9"
+# dependencies = [
+#     "requests>=2.28.0",
+# ]
+# [project]
+# name = "spoolman-importer"
+# version = "0.1.0"
+# description = "Imports filament inventory from a SpoolMan server into OrcaSlicer filament presets."
+# authors = [{name = "Your Name"}]
+# /// 
+
+"""
+SpoolMan Importer Plugin for OrcaSlicer
+Main plugin entry point and Pages UI
+"""
+
 import json
+import os
+from pathlib import Path
 
 try:
-    import wx
-except ImportError:
-    wx = None
+    from settings_manager import SettingsManager
+    from spoolman_api import SpoolManClient
+    from preset_importer import PresetImportBuilder
+except ImportError as e:
+    print(f"[SpoolMan] Import error: {e}")
+    class SettingsManager:
+        def load(self):
+            return {}
+        def save(self, settings):
+            pass
 
-from settings_manager import SettingsManager
-from spoolman_api import SpoolManClient
-from preset_importer import PresetImportBuilder
 
 class SpoolManPage:
     """
-    Simple starter page object.
-    This class is intentionally lightweight and meant to be adapted to the actual OrcaSlicer
-    pages plugin API in your installed version.
+    SpoolMan Importer Page - Main UI entry point
+    This class provides the UI for configuring and importing from SpoolMan
     """
 
-    def __init__(self, parent=None):
-        self.parent = parent
+    def __init__(self):
+        """Initialize the SpoolMan page plugin"""
         self.settings_manager = SettingsManager()
         self.settings = self.settings_manager.load()
-        self.importer = PresetImportBuilder(self.settings)
         self.records = []
         self.selected_indexes = set()
+        
+        print("[SpoolMan] Page initialized successfully")
 
-        if wx is not None:
-            self.panel = self._build_ui()
+    def show_settings_panel(self):
+        """Display the settings configuration panel"""
+        return {
+            "title": "SpoolMan Settings",
+            "sections": [
+                {
+                    "name": "Server Connection",
+                    "fields": [
+                        {
+                            "key": "spoolman_url",
+                            "label": "SpoolMan URL",
+                            "type": "text",
+                            "value": self.settings.get("spoolman_url", "http://localhost:7912"),
+                            "hint": "e.g., http://localhost:7912"
+                        },
+                        {
+                            "key": "auth_mode",
+                            "label": "Authentication Mode",
+                            "type": "choice",
+                            "choices": ["none", "api_key", "basic"],
+                            "value": self.settings.get("auth_mode", "none")
+                        },
+                        {
+                            "key": "api_key",
+                            "label": "API Key",
+                            "type": "password",
+                            "value": self.settings.get("api_key", ""),
+                            "condition": "auth_mode == 'api_key'"
+                        },
+                        {
+                            "key": "username",
+                            "label": "Username",
+                            "type": "text",
+                            "value": self.settings.get("username", ""),
+                            "condition": "auth_mode == 'basic'"
+                        },
+                        {
+                            "key": "password",
+                            "label": "Password",
+                            "type": "password",
+                            "value": self.settings.get("password", ""),
+                            "condition": "auth_mode == 'basic'"
+                        }
+                    ]
+                },
+                {
+                    "name": "Import Options",
+                    "fields": [
+                        {
+                            "key": "naming_template",
+                            "label": "Preset Naming Template",
+                            "type": "text",
+                            "value": self.settings.get("naming_template", "{brand} {type} {spool_id}"),
+                            "hint": "Available: {brand}, {type}, {color}, {spool_id}, {material}, {weight}, {diameter}, {nozzle_temp}, {bed_temp}"
+                        },
+                        {
+                            "key": "gcode_template",
+                            "label": "Filament Start G-code Template",
+                            "type": "textarea",
+                            "value": self.settings.get("gcode_template", "SET_ACTIVE_SPOOL ID={spool_id}"),
+                            "hint": "Use variables like {spool_id}, {brand}, {type}, etc."
+                        },
+                        {
+                            "key": "preset_dir",
+                            "label": "Preset Directory (optional)",
+                            "type": "folder",
+                            "value": self.settings.get("preset_dir", "")
+                        }
+                    ]
+                }
+            ]
+        }
 
-    def _build_ui(self):
-        panel = wx.Panel(self.parent, -1)
-        sizer = wx.BoxSizer(wx.VERTICAL)
-
-        # Server Settings
-        server_box = wx.StaticBox(panel, -1, "SpoolMan Settings")
-        server_sizer = wx.StaticBoxSizer(server_box, wx.VERTICAL)
-
-        url_text = wx.TextCtrl(panel, value=self.settings.get("spoolman_url", ""))
-        api_key_text = wx.TextCtrl(panel, value=self.settings.get("api_key", ""))
-        username_text = wx.TextCtrl(panel, value=self.settings.get("username", ""))
-        password_text = wx.TextCtrl(panel, value=self.settings.get("password", ""), style=wx.TE_PASSWORD)
-        auth_choice = wx.Choice(panel, choices=["none", "api_key", "basic"])
-        auth_choice.SetStringSelection(self.settings.get("auth_mode", "none"))
-
-        server_sizer.Add(wx.StaticText(panel, -1, "URL"), 0, wx.ALL | wx.ALIGN_LEFT, 5)
-        server_sizer.Add(url_text, 0, wx.ALL | wx.EXPAND, 5)
-        server_sizer.Add(wx.StaticText(panel, -1, "API key"), 0, wx.ALL | wx.ALIGN_LEFT, 5)
-        server_sizer.Add(api_key_text, 0, wx.ALL | wx.EXPAND, 5)
-        server_sizer.Add(wx.StaticText(panel, -1, "Username"), 0, wx.ALL | wx.ALIGN_LEFT, 5)
-        server_sizer.Add(username_text, 0, wx.ALL | wx.EXPAND, 5)
-        server_sizer.Add(wx.StaticText(panel, -1, "Password"), 0, wx.ALL | wx.ALIGN_LEFT, 5)
-        server_sizer.Add(password_text, 0, wx.ALL | wx.EXPAND, 5)
-        server_sizer.Add(wx.StaticText(panel, -1, "Auth mode"), 0, wx.ALL | wx.ALIGN_LEFT, 5)
-        server_sizer.Add(auth_choice, 0, wx.ALL | wx.EXPAND, 5)
-
-        # Import Settings
-        import_box = wx.StaticBox(panel, -1, "Import Options")
-        import_sizer = wx.StaticBoxSizer(import_box, wx.VERTICAL)
-
-        naming_t = wx.TextCtrl(panel, value=self.settings.get("naming_template", "{brand} {type} {spool_id}"))
-        gcode_t = wx.TextCtrl(panel, value=self.settings.get("gcode_template", "SET_ACTIVE_SPOOL ID={spool_id}"))
-        preset_dir_t = wx.TextCtrl(panel, value=self.settings.get("preset_dir", ""))
-        import_fields_t = wx.TextCtrl(panel, value=", ".join(self.settings.get("import_fields", [])))
-        import_sizer.Add(wx.StaticText(panel, -1, "Naming template"), 0, wx.ALL | wx.ALIGN_LEFT, 5)
-        import_sizer.Add(naming_t, 0, wx.ALL | wx.EXPAND, 5)
-        import_sizer.Add(wx.StaticText(panel, -1, "G-code template"), 0, wx.ALL | wx.ALIGN_LEFT, 5)
-        import_sizer.Add(gcode_t, 0, wx.ALL | wx.EXPAND, 5)
-        import_sizer.Add(wx.StaticText(panel, -1, "Preset directory"), 0, wx.ALL | wx.ALIGN_LEFT, 5)
-        import_sizer.Add(preset_dir_t, 0, wx.ALL | wx.EXPAND, 5)
-        import_sizer.Add(wx.StaticText(panel, -1, "Import fields"), 0, wx.ALL | wx.ALIGN_LEFT, 5)
-        import_sizer.Add(import_fields_t, 0, wx.ALL | wx.EXPAND, 5)
-
-        # Actions
-        button_sizer = wx.BoxSizer(wx.HORIZONTAL)
-        save_button = wx.Button(panel, label="Save Settings")
-        fetch_button = wx.Button(panel, label="Fetch SpoolMan")
-        import_button = wx.Button(panel, label="Import Selected")
-
-        button_sizer.Add(save_button, 0, wx.ALL, 5)
-        button_sizer.Add(fetch_button, 0, wx.ALL, 5)
-        button_sizer.Add(import_button, 0, wx.ALL, 5)
-
-        sizer.Add(server_sizer, 0, wx.ALL | wx.EXPAND, 5)
-        sizer.Add(import_sizer, 0, wx.ALL | wx.EXPAND, 5)
-        sizer.Add(button_sizer, 0, wx.ALL, 5)
-
-        panel.SetSizerAndFit(sizer)
-
-        def save_settings(event=None):
-            settings = self.settings_manager.load()
-            settings["spoolman_url"] = url_text.GetValue()
-            settings["api_key"] = api_key_text.GetValue()
-            settings["username"] = username_text.GetValue()
-            settings["password"] = password_text.GetValue()
-            settings["auth_mode"] = auth_choice.GetStringSelection()
-            settings["naming_template"] = naming_t.GetValue()
-            settings["gcode_template"] = gcode_t.GetValue()
-            settings["preset_dir"] = preset_dir_t.GetValue()
-            settings["import_fields"] = [field.strip() for field in import_fields_t.GetValue().split(",") if field.strip()]
-            self.settings_manager.save(settings)
-            self.settings = settings
-
-        def fetch_from_spoolman(event=None):
-            save_settings()
+    def on_fetch_from_spoolman(self):
+        """Fetch filament inventory from SpoolMan server"""
+        try:
             client = SpoolManClient(self.settings)
-            try:
-                self.records = client.fetch_filaments()
-                print(f"Fetched {len(self.records)} records from SpoolMan")
-            except Exception as exc:
-                print(f"SpoolMan fetch failed: {exc}")
+            self.records = client.fetch_filaments()
+            return {
+                "status": "success",
+                "message": f"Fetched {len(self.records)} filaments from SpoolMan",
+                "records": self.records
+            }
+        except Exception as e:
+            return {
+                "status": "error",
+                "message": f"Failed to fetch from SpoolMan: {str(e)}"
+            }
 
-        def import_selected(event=None):
-            save_settings()
-            for idx, item in enumerate(self.records):
-                if idx not in self.selected_indexes:
-                    continue
-                self.importer.write_preset_file(item)
+    def on_import_selected(self, selected_indexes):
+        """Import selected filaments into OrcaSlicer"""
+        try:
+            importer = PresetImportBuilder(self.settings)
+            imported_count = 0
+            
+            for idx in selected_indexes:
+                if idx < len(self.records):
+                    item = self.records[idx]
+                    importer.write_preset_file(item)
+                    imported_count += 1
+            
+            return {
+                "status": "success",
+                "message": f"Successfully imported {imported_count} filament presets"
+            }
+        except Exception as e:
+            return {
+                "status": "error",
+                "message": f"Import failed: {str(e)}"
+            }
 
-        save_button.Bind(wx.EVT_BUTTON, save_settings)
-        fetch_button.Bind(wx.EVT_BUTTON, fetch_from_spoolman)
-        import_button.Bind(wx.EVT_BUTTON, import_selected)
+    def on_save_settings(self, new_settings):
+        """Save plugin settings"""
+        try:
+            self.settings_manager.save(new_settings)
+            self.settings = new_settings
+            return {
+                "status": "success",
+                "message": "Settings saved successfully"
+            }
+        except Exception as e:
+            return {
+                "status": "error",
+                "message": f"Failed to save settings: {str(e)}"
+            }
 
-        return panel
 
-    def fetch_records(self):
-        client = SpoolManClient(self.settings)
-        return client.fetch_filaments()
-
-    def run(self):
-        if wx is None:
-            print("wxPython not available in this environment")
-            return
-        self.panel.Show()
+# Plugin entry point
+def get_plugin_page():
+    """Factory function to create the plugin page"""
+    return SpoolManPage()
