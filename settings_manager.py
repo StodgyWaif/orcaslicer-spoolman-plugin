@@ -1,3 +1,11 @@
+# /// script
+# requires-python = ">=3.9"
+# dependencies = []
+# [project]
+# name = "spoolman-settings-manager"
+# version = "0.1.0"
+# /// 
+
 import json
 import os
 from pathlib import Path
