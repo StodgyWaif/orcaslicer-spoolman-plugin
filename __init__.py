@@ -1,7 +1,6 @@
 # /// script
 # name = "spoolman-importer"
 # version = "0.1.0"
-# description = "Imports filament inventory from a SpoolMan server"
 # requires-python = ">=3.9"
 # dependencies = ["requests>=2.28.0"]
 # ///
