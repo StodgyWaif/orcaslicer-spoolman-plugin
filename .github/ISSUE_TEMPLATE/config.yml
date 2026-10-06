@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://github.com/StodgyWaif/orcaslicer-spoolman-plugin#readme
+    about: Review setup, configuration, field mapping, backup, and troubleshooting guidance.
+  - name: OrcaSlicer plugin documentation
+    url: https://github.com/OrcaSlicer/OrcaSlicer/wiki/plugins_getting_started
+    about: Review OrcaSlicer's plugin installation and management guidance.
