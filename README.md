@@ -1,45 +1,49 @@
-````markdown
-# SpoolMan Importer for OrcaSlicer
+# OrcaSlicer SpoolMan Importer
 
-This project is a starter plugin for OrcaSlicer that imports filament inventory from a SpoolMan server and creates a simple preset export structure.
+A development-stage OrcaSlicer plugin that reads SpoolMan inventory and creates or maintains OrcaSlicer filament presets.
 
-This is intended as a learning scaffold and starting point for a real OrcaSlicer plugin integration.
+> **Development status:** v1.0.72 is an external-testing build. Back up OrcaSlicer presets before testing and review every Import Preview or Synchronization Preview before writing changes.
 
-## Features
+## Highlights
 
-- SpoolMan URL + auth settings
-- Configurable naming template
-- Configurable g-code template
-- Preset directory configuration
-- Fetch inventory from SpoolMan
-- Import selected records into a generated preset output
+- Reads spool, filament, vendor, and custom-field data from SpoolMan
+- Creates OrcaSlicer filament presets with preview-first workflows
+- Supports configurable field mappings and independent plate temperatures
+- Recognizes the custom spool field `date_acquired`
+- Tracks linked presets, moved files, missing files, and multi-profile spools
+- Provides preset backups, full backups, restoration, diagnostics, themes, and update notifications
 
-## Project structure
+## Requirements
 
-- `manifest.json` — plugin manifest
-- `settings_manager.py` — user settings persistence
-- `spoolman_api.py` — SpoolMan API client
-- `preset_importer.py` — preset creation logic
-- `spoolman_plugin.py` — UI page and main plugin logic
+- A compatible OrcaSlicer build with Python plugin support
+- A reachable SpoolMan server
+- Permission to write to the selected OrcaSlicer user filament-preset folder
 
-## Typical workflow
+## Quick start
 
-1. Edit settings in the plugin page
-2. Set SpoolMan host URL
-3. Save settings
-4. Fetch filament inventory
-5. Review the list
-6. Select which items to import
-7. Export or create preset files
+1. Download `spoolman_plugin.py` from the latest GitHub release.
+2. In OrcaSlicer, open **Plugins** and choose **Install local plugin**.
+3. Restart OrcaSlicer if requested.
+4. Open **SpoolMan Importer > Settings**.
+5. Enter the SpoolMan URL and select the OrcaSlicer filament folder.
+6. Save settings, refresh inventory, and run an Import Preview before importing.
 
-## Important note
+See [Installation](INSTALLATION.md), [Configuration](CONFIGURATION.md), and [Troubleshooting](TROUBLESHOOTING.md).
 
-This plugin is intentionally simplified. For a real OrcaSlicer build, you will likely need to adapt:
-- the page registration format
-- the page class names
-- how preset files are written
-- how the plugin is discovered by the active OrcaSlicer version
+## Safety model
+
+- SpoolMan is treated as a read-oriented source for preset generation.
+- Imports and synchronization are preview-first.
+- Existing presets are backed up before managed updates.
+- Missing or invalid mapped values do not erase existing Orca values.
+- The update checker is informational and does not install files automatically.
+
+## Support
+
+- Use the Bug Report issue template for reproducible defects.
+- Use the Feature Request template for proposed enhancements.
+- Inspect diagnostic bundles before uploading them publicly.
 
 ## License
 
-MIT
+Choose and add a repository license before broad public distribution. GitHub's license chooser can add a standard license from the repository interface.
