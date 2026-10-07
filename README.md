@@ -2,16 +2,74 @@
 
 A development-stage OrcaSlicer plugin that reads SpoolMan inventory and creates or maintains OrcaSlicer filament presets.
 
-> **Development status:** v1.0.72 is an external-testing build. This build was tested on **OrcaSlicer 2.5.0-dev**. Compatibility with other OrcaSlicer versions has not yet been fully verified. Back up OrcaSlicer presets before testing and review every Import Preview or Synchronization Preview before writing changes.
+> [!CAUTION]
+> Version 1.0.72 is a development prerelease tested on
+> **OrcaSlicer 2.5.0-dev**. The plugin can create and update
+> OrcaSlicer filament preset files. Create a full backup before
+> testing imports, synchronization, cleanup, or restoration.
 
-## Highlights
+## Features
 
-- Reads spool, filament, vendor, and custom-field data from SpoolMan
-- Creates OrcaSlicer filament presets with preview-first workflows
-- Supports configurable field mappings and independent plate temperatures
-- Discovers built-in and custom SpoolMan fields, including optional spool-level fields such as `date_acquired`
-- Tracks linked presets, moved files, missing files, and multi-profile spools
-- Provides preset backups, full backups, restoration, diagnostics, themes, and update notifications
+### Inventory and Importing
+
+- Browse SpoolMan inventory inside OrcaSlicer
+- Search, filter, sort, and customize visible columns
+- Highlight and filter low-filament spools
+- Open individual SpoolMan records in the default browser
+- Preview generated presets before writing files
+- Control how existing presets are handled
+
+### OrcaSlicer Preset Management
+
+- Generate OrcaSlicer filament presets from SpoolMan records
+- Track one or more Orca presets linked to a spool
+- Preview differences before synchronization
+- Bulk update selected managed fields
+- Detect missing, moved, renamed, and locally modified presets
+- Back up presets before managed changes
+
+### SpoolMan Field Integration
+
+- Discover built-in and custom spool, filament, and vendor fields
+- Configure SpoolMan-to-Orca field mappings
+- Map plate temperatures independently
+- Validate numeric values before writing them
+- Support optional spool custom fields such as `date_acquired`
+
+### Recovery and Diagnostics
+
+- Preset backups
+- Import-index backups
+- Full ZIP backup and computer transfer
+- Pre-restore safety backups
+- Diagnostic export with optional sanitized error excerpts
+- Stable and Development update-notification channels
+
+## Documentation
+
+- [Installation](INSTALLATION.md)
+- [Configuration](CONFIGURATION.md)
+- [Field Mappings](FIELD_MAPPINGS.md)
+- [Backup and Restore](BACKUP_AND_RESTORE.md)
+- [Troubleshooting](TROUBLESHOOTING.md)
+- [Changelog](CHANGELOG.md)
+- [ocs/RELEASE_CHECKLIST.md
+
+## Download and Install
+
+> Version 1.0.72 was tested on **OrcaSlicer 2.5.0-dev**.
+
+1. Download `spoolman_plugin.py` from the
+   [latest GitHub release](https://github.com/StodgyWaif/orcaslicer-spoolman-plugin/releases).
+2. Open OrcaSlicer's **Plugins** window.
+3. Select **Install local plugin**.
+4. Choose `spoolman_plugin.py`.
+5. Fully restart OrcaSlicer.
+6. Open **SpoolMan Importer > Settings**.
+
+[Installation Guide](INSTALLATION.md) |
+[Configuration Guide](CONFIGURATION.md) |
+[Troubleshooting](TROUBLESHOOTING.md)
 
 ## Screenshots
 
