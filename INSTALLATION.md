@@ -2,24 +2,29 @@
 
 ## Tested Environment
 
-Plugin version **1.0.72** was tested on **OrcaSlicer 2.5.0-dev**. Other OrcaSlicer builds may work, but should be treated as unverified until reported by testers.
+This plugin was tested on **OrcaSlicer 2.5.0-dev**. Other OrcaSlicer builds may work, but should be treated as unverified until reported by testers.
+
+## Cloud Installation
+The recommended installation method is via the Orca Cloud plugin subscription.
+https://cloud.orcaslicer.com/p/4e00554f8f78
+
 
 ## Local Installation
 
 1. Open the repository's [Releases page](https://github.com/StodgyWaif/orcaslicer-spoolman-plugin/releases).
 2. Expand **Assets** for the desired release.
-3. Download `spoolman_plugin.py`.
+3. Download `spoolman_plugin_win_x86_64.py`.
 4. Open OrcaSlicer.
 5. Open the **Plugins** window.
 6. Select **Install local plugin**.
-7. Choose the downloaded `spoolman_plugin.py`.
+7. Choose the downloaded `spoolman_plugin_win_x86_64.py`.
 8. Refresh the plugin list or fully restart OrcaSlicer.
 9. Confirm **SpoolMan Importer** appears and reports the expected version.
 
 The installation file should retain the name:
 
 ```text
-spoolman_plugin.py
+spoolman_plugin_win_x86_64.py
 ```
 
 ## First-Run Checklist
@@ -38,7 +43,7 @@ spoolman_plugin.py
 
 1. Open **Settings > Advanced: Index and Folder Maintenance**.
 2. Create and validate a full backup.
-3. Preserve the currently installed `spoolman_plugin.py` separately.
+3. Preserve the currently installed `spoolman_plugin_win_x86_64.py` separately.
 4. Download the new release asset.
 5. Replace or reinstall the plugin through OrcaSlicer's Plugins window.
 6. Fully close and restart OrcaSlicer.
@@ -64,7 +69,7 @@ Review these items separately if a complete cleanup is required.
 
 ### Local Installation
 
-Installed manually from `spoolman_plugin.py`. GitHub release notifications can be used to identify newer versions.
+Installed manually from `spoolman_plugin_win_x86_64.py`. GitHub release notifications can be used to identify newer versions.
 
 ### Plugin Hub Installation
 
