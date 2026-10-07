@@ -39,8 +39,6 @@ A development-stage OrcaSlicer plugin that reads SpoolMan inventory and creates 
 
 ![Backup, restore, diagnostics, and maintenance controls](screenshots/backup-maintenance.png)
 
-> Add the six PNG files to the repository's `screenshots` folder using the exact filenames shown. See `screenshots/README.md` for capture instructions.
-
 ## Requirements
 
 - A compatible OrcaSlicer build with Python plugin support
