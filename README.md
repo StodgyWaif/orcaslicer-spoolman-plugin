@@ -1,4 +1,5 @@
 # OrcaSlicer SpoolMan Importer
+<img src="assets/Logo.png" alt="Logo" width="200" height="200">
 
 An OrcaSlicer plugin that reads SpoolMan inventory and creates or maintains OrcaSlicer filament presets.
 
