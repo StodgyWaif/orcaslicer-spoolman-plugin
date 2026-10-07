@@ -18,8 +18,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Optional: build your plugin here so PLUGIN_FILES exist, e.g.
-      # - run: pipx run build --wheel
+      - name: Download plugin from release assets
+        run: |
+          # Download the plugin file from the current release
+          gh release download "$GITHUB_REF_NAME" \
+            --pattern "$PLUGIN_FILES" \
+            --dir "."
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish release to OrcaCloud
         run: |
