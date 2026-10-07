@@ -10,7 +10,7 @@ permissions:
 
 env:
   # Space-separated globs matching the plugin files to upload (.whl / .py).
-  PLUGIN_FILES: "my_plugin_any.py"
+  PLUGIN_FILES: "spoolman_plugin_win_x86_64.py"
 
 jobs:
   publish:
