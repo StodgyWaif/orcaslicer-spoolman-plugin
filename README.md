@@ -123,7 +123,6 @@ Before changing an existing managed preset, the plugin:
 - [Contributing](CONTRIBUTING.md)
 - [Security Policy](.github/SECURITY.md)
 - [Changelog](CHANGELOG.md)
-- [Release Checklist](docs/RELEASE_CHECKLIST.md)
 
 ## Support
 
