@@ -1,22 +1,15 @@
 # OrcaSlicer SpoolMan Importer
 
-A development-stage OrcaSlicer plugin that reads SpoolMan inventory and creates or maintains OrcaSlicer filament presets.
+An OrcaSlicer plugin that reads SpoolMan inventory and creates or maintains OrcaSlicer filament presets.
 
 > [!CAUTION]
-> Version **1.0.72** is a development prerelease tested on **OrcaSlicer 2.5.0-dev**. Compatibility with other OrcaSlicer versions has not yet been fully verified. The plugin can create and update OrcaSlicer filament preset files. Create a full backup before testing imports, synchronization, cleanup, or restoration.
+> This is a development prerelease tested on **OrcaSlicer 2.5.0-dev**. Compatibility with other OrcaSlicer versions has not yet been fully verified. The plugin can create and update OrcaSlicer filament preset files. Create a full backup before testing imports, synchronization, cleanup, or restoration.
 
-## Download and Install
-
-1. Download `spoolman_plugin.py` from the [GitHub Releases page](https://github.com/StodgyWaif/orcaslicer-spoolman-plugin/releases).
-2. Open OrcaSlicer's **Plugins** window.
-3. Select **Install local plugin**.
-4. Choose `spoolman_plugin.py`.
-5. Fully restart OrcaSlicer.
-6. Open **SpoolMan Importer > Settings**.
+**!! You should create a full backup of your OrcaSlicer profile before testing imports, synchronization, cleanup, or restoration !!**
 
 [Installation Guide](INSTALLATION.md) | [Configuration Guide](CONFIGURATION.md) | [Field Mappings](FIELD_MAPPINGS.md) | [Backup and Restore](BACKUP_AND_RESTORE.md) | [Troubleshooting](TROUBLESHOOTING.md) | [Changelog](CHANGELOG.md)
 
-## Features
+## **Features**
 
 ### Inventory and Importing
 
@@ -46,8 +39,6 @@ A development-stage OrcaSlicer plugin that reads SpoolMan inventory and creates 
 - Validate numeric values before writing them.
 - Support optional spool custom fields such as `date_acquired`.
 
-`date_acquired` is a user-created spool custom field and is not a default SpoolMan field.
-
 ### Recovery, Diagnostics, and Updates
 
 - Preset backups.
@@ -57,6 +48,15 @@ A development-stage OrcaSlicer plugin that reads SpoolMan inventory and creates 
 - Diagnostic export with optional sanitized error excerpts.
 - Stable and Development update-notification channels.
 - Orca Dark, Midnight Blue, Graphite, and Light themes.
+
+## Alternative Manual Download and Installation
+
+1. Download `spoolman_plugin.py` from the [GitHub Releases page](https://github.com/StodgyWaif/orcaslicer-spoolman-plugin/releases).
+2. Open OrcaSlicer's **Plugins** window.
+3. Select **Install local plugin**.
+4. Choose `spoolman_plugin.py`.
+5. Fully restart OrcaSlicer.
+6. Open **SpoolMan Importer > Settings**.
 
 ## Screenshots
 
