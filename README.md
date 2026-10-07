@@ -9,7 +9,7 @@ A development-stage OrcaSlicer plugin that reads SpoolMan inventory and creates 
 - Reads spool, filament, vendor, and custom-field data from SpoolMan
 - Creates OrcaSlicer filament presets with preview-first workflows
 - Supports configurable field mappings and independent plate temperatures
-- Recognizes user-created spool custom fields
+- Discovers built-in and custom SpoolMan fields, including optional spool-level fields such as `date_acquired`
 - Tracks linked presets, moved files, missing files, and multi-profile spools
 - Provides preset backups, full backups, restoration, diagnostics, themes, and update notifications
 
