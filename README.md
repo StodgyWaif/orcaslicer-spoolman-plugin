@@ -49,6 +49,10 @@ An OrcaSlicer plugin that reads SpoolMan inventory and creates or maintains Orca
 - Stable and Development update-notification channels.
 - Orca Dark, Midnight Blue, Graphite, and Light themes.
 
+## Getting Started
+
+It is recommended to use the Orca Cloud plugin: https://cloud.orcaslicer.com/p/4e00554f8f78
+
 ## Alternative Manual Download and Installation
 
 1. Download `spoolman_plugin.py` from the [GitHub Releases page](https://github.com/StodgyWaif/orcaslicer-spoolman-plugin/releases).
