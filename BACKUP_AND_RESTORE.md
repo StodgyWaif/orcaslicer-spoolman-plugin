@@ -2,7 +2,7 @@
 
 Use the plugin's backup tools before large imports, synchronization, cleanup, upgrades, restoration, or computer migration.
 
-The v1.0.72 backup and restore workflow was tested on **OrcaSlicer 2.5.0-dev**.
+The backup and restore workflow was tested on **OrcaSlicer 2.5.0-dev**.
 
 ## Backup Types
 
