@@ -1,6 +1,6 @@
 # Configuration
 
-> The v1.0.72 configuration workflow documented here was tested on **OrcaSlicer 2.5.0-dev**. Menu names or plugin-management behavior may differ in other builds.
+> The configuration workflow documented here was tested on **OrcaSlicer 2.5.0-dev**. Menu names or plugin-management behavior may differ in other builds.
 
 ## SpoolMan Connection
 
