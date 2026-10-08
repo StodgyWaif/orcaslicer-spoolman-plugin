@@ -53,7 +53,9 @@ An OrcaSlicer plugin that reads SpoolMan inventory and creates or maintains Orca
 ## Getting Started
 
 It is recommended to use the Orca Cloud plugin: https://cloud.orcaslicer.com/p/4e00554f8f78
+
 You must be using a build that supports plugins (currently the nightly builds)
+
 https://www.orcaslicer.com/download/
 
 ## Alternative Manual Download and Installation
