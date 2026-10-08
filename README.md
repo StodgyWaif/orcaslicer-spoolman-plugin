@@ -8,7 +8,7 @@ An OrcaSlicer plugin that reads SpoolMan inventory and creates or maintains Orca
 
 **!! You should create a full backup of your OrcaSlicer profile before testing imports, synchronization, cleanup, or restoration !!**
 
-[Installation Guide](INSTALLATION.md) | [Configuration Guide](CONFIGURATION.md) | [Field Mappings](FIELD_MAPPINGS.md) | [Backup and Restore](BACKUP_AND_RESTORE.md) | [Troubleshooting](TROUBLESHOOTING.md)
+[Installation Guide](INSTALLATION.md) | [Configuration Guide](CONFIGURATION.md) | [Field Mappings](FIELD_MAPPINGS.md) | [Backup and Restore](BACKUP_AND_RESTORE.md) | [Troubleshooting](TROUBLESHOOTING.md) | [Contributing](CONTRIBUTING.md) | [Changelog](CHANGELOG.md)
 
 ## **Features**
 
