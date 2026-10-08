@@ -6,7 +6,7 @@ The current development build was tested on **OrcaSlicer 2.5.0-dev**. When repor
 
 ## Plugin Does Not Load
 
-- Confirm the file is named `spoolman_plugin.py`.
+- Confirm the file is named `spoolman_plugin_win_x86_64.py`.
 - Fully restart OrcaSlicer.
 - Review the plugin Diagnostics tab.
 - Reinstall the last confirmed release asset.
