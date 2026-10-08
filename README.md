@@ -4,11 +4,11 @@
 An OrcaSlicer plugin that reads SpoolMan inventory and creates or maintains OrcaSlicer filament presets.
 
 > [!CAUTION]
-> This is a development prerelease tested on **OrcaSlicer 2.5.0-dev**. Compatibility with other OrcaSlicer versions has not yet been fully verified. The plugin can create and update OrcaSlicer filament preset files. Create a full backup before testing imports, synchronization, cleanup, or restoration.
+> This is a development prerelease tested on **OrcaSlicer 2.5.0-dev**. Compatibility with other OrcaSlicer versions has not yet been fully verified. The plugin can create and update OrcaSlicer filament presets.
 
 **!! You should create a full backup of your OrcaSlicer profile before testing imports, synchronization, cleanup, or restoration !!**
 
-[Installation Guide](INSTALLATION.md) | [Configuration Guide](CONFIGURATION.md) | [Field Mappings](FIELD_MAPPINGS.md) | [Backup and Restore](BACKUP_AND_RESTORE.md) | [Troubleshooting](TROUBLESHOOTING.md) | [Changelog](CHANGELOG.md)
+[Installation Guide](INSTALLATION.md) | [Configuration Guide](CONFIGURATION.md) | [Field Mappings](FIELD_MAPPINGS.md) | [Backup and Restore](BACKUP_AND_RESTORE.md) | [Troubleshooting](TROUBLESHOOTING.md)
 
 ## **Features**
 
@@ -56,10 +56,10 @@ It is recommended to use the Orca Cloud plugin: https://cloud.orcaslicer.com/p/4
 
 ## Alternative Manual Download and Installation
 
-1. Download `spoolman_plugin.py` from the [GitHub Releases page](https://github.com/StodgyWaif/orcaslicer-spoolman-plugin/releases).
+1. Download `spoolman_plugin_win_x86_64.py` from the [GitHub Releases page](https://github.com/StodgyWaif/orcaslicer-spoolman-plugin/releases).
 2. Open OrcaSlicer's **Plugins** window.
 3. Select **Install local plugin**.
-4. Choose `spoolman_plugin.py`.
+4. Choose `spoolman_plugin_win_x86_64.py`.
 5. Fully restart OrcaSlicer.
 6. Open **SpoolMan Importer > Settings**.
 
