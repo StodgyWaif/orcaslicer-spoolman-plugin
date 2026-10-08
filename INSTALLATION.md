@@ -8,6 +8,9 @@ This plugin was tested on **OrcaSlicer 2.5.0-dev**. Other OrcaSlicer builds may 
 The recommended installation method is via the Orca Cloud plugin subscription.
 https://cloud.orcaslicer.com/p/4e00554f8f78
 
+You must be using a build that supports plugins (currently the nightly builds)
+
+https://www.orcaslicer.com/download/
 
 ## Local Installation
 
