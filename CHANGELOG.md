@@ -2,6 +2,8 @@
 
 ## 1.0.72
 
+Development prerelease for external testing.
+
 - Completed the development hardening pass.
 - Added distinct documentation, bug-report, and feature-request routes.
 - Removed obsolete hard-coded Importer theme colors.
