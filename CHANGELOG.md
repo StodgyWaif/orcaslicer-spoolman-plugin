@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.0.75
+
+Development prerelease for external testing.
+
+- Fixed persistent data issue conflicting with cloud update.
+
+## 1.0.74
+
+Development prerelease for external testing.
+
+- Fixed minor theme issues.
+
+## 1.0.73
+
+Development prerelease for external testing.
+
+- Fixed issue where if both tabs were hidden plugin would not load.
+
 ## 1.0.72
 
 Development prerelease for external testing.
